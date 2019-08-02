@@ -55,9 +55,9 @@ export default [
   {sid: '800.6100.24', name: 'Instant Consumption'},
 
   // https://github.com/fesch/CanZE/blob/master/app/src/main/java/lu/fisch/canze/activities/RangeActivity.java
-  {sid: '654.52', name: 'Average Consumption'},
-  {sid: '62d.0', name: 'WorstAverageConsumption'},
-  {sid: '62d.10', name: 'BestAverageConsumption'},
+  {sid: '654.52', name: 'Average Consumption', transform: v => v / 10, unit: 'kWh/100km'},
+  {sid: '62d.0', name: 'WorstAverageConsumption', transform: v => v / 10, unit: 'kWh/100km'},
+  {sid: '62d.10', name: 'BestAverageConsumption', transform: v => v / 10, unit: 'kWh/100km'},
 
   // Gathered from other files of https://github.com/fesch/CanZE
   {sid: '1f8.40', name: 'Electric Engine RPM'},
