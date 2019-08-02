@@ -1,1 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
+
+.metrics-list {
+  height: calc(100vh - 100px);
+  overflow-y: scroll;
+}
+
+.ploty-placeholder {
+  min-height: 450px;
+  margin-bottom: 0;
+}
