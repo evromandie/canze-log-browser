@@ -1,3 +1,8 @@
+function transformTemperature(v) {
+  // This is not confirmed, but 26° appears to be returned as 66
+  return v - 40;
+}
+
 export default [
   // from https://github.com/fesch/CanZE/blob/master/app/src/main/java/lu/fisch/canze/activities/ChargingTechActivity.java
   {sid: '7bb.6101.336', name: 'Max Charge', transform: v => v / 100, unit: 'kW'},
@@ -10,15 +15,13 @@ export default [
   {sid: '7ec.623206.24', name: 'State of Health', unit: '%'},
   {sid: '654.42', name: 'Range Estimate', unit: 'km'},
   {sid: '65b.41', name: 'Charging Status Display', unit: 'enum'}, // 0=notcharging, 3=charging, 5/6=preparing?
-  {sid: '7ec.623203.24', name: 'Traction Battery Voltage'},
-  {sid: '7ec.623204.24', name: 'Traction Battery Current'},
+  {sid: '7ec.623203.24', name: 'Traction Battery Voltage', transform: v => v / 2, unit: 'V'},
+  {sid: '7ec.623204.24', name: 'Traction Battery Current', transform: v => v / 500, unit: 'A'},
   {sid: '7bb.6103.192', name: 'Real SoC', transform: v => v / 100, unit: '%'},
-  {sid: '7ec.622005.24', name: '12V'},
-  {sid: '7ec.623028.24', name: '12A'},
+  {sid: '7ec.622005.24', name: '12V Battery Voltage', transform: v => v / 100, unit: 'V'},
+  {sid: '7ec.623028.24', name: '12V Battery Current', transform: v => v / 2, unit: 'A'},
   {sid: '1fd.0', name: 'DC Load'},
   {sid: '7bb.6161.96', name: 'Traction battery odometer', unit: 'km'},
-  {sid: '7bb.6104.', name: 'SID_Preamble_CompartmentTemperatures'}, // TODO: many sub-codes
-  {sid: '7bb.6107.', name: 'SID_Preamble_BalancingBytes'}, // TODO: many sub-codes
   {sid: '793.50c0.0', name: 'SID_TesterInit'},
   {sid: '793.7e01.0', name: 'SID_TesterAwake'},
 
@@ -36,6 +39,32 @@ export default [
   {sid: '793.625062.24', name: 'SID_GroundResistance'},
   {sid: '793.625063.24', name: 'SID_SupervisorState'},
   {sid: '793.625064.24', name: 'SID_CompletionStatus'},
+
+  {sid: '7bb.6104.32', name: 'Battery module #1 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.56', name: 'Battery module #2 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.80', name: 'Battery module #3 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.104', name: 'Battery module #4 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.128', name: 'Battery module #5 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.152', name: 'Battery module #6 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.176', name: 'Battery module #7 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.200', name: 'Battery module #8 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.224', name: 'Battery module #9 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.248', name: 'Battery module #10 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.272', name: 'Battery module #11 temperature', transform: transformTemperature, unit: '°C'},
+  {sid: '7bb.6104.296', name: 'Battery module #12 temperature', transform: transformTemperature, unit: '°C'},
+
+  {sid: '7bb.6107.16', name: 'Battery module #1 balancing'},
+  {sid: '7bb.6107.24', name: 'Battery module #2 balancing'},
+  {sid: '7bb.6107.32', name: 'Battery module #3 balancing'},
+  {sid: '7bb.6107.40', name: 'Battery module #4 balancing'},
+  {sid: '7bb.6107.48', name: 'Battery module #5 balancing'},
+  {sid: '7bb.6107.56', name: 'Battery module #6 balancing'},
+  {sid: '7bb.6107.64', name: 'Battery module #7 balancing'},
+  {sid: '7bb.6107.72', name: 'Battery module #8 balancing'},
+  {sid: '7bb.6107.80', name: 'Battery module #9 balancing'},
+  {sid: '7bb.6107.88', name: 'Battery module #10 balancing'},
+  {sid: '7bb.6107.96', name: 'Battery module #11 balancing'},
+  {sid: '7bb.6107.104', name: 'Battery module #12 balancing'},
 
   // https://github.com/fesch/CanZE/blob/master/app/src/main/java/lu/fisch/canze/activities/DrivingActivity.java
   {sid: '1fd.48', name: 'EVC DC Power', transform: v => v - 80, unit: 'kW'},
@@ -62,7 +91,7 @@ export default [
   // Gathered from other files of https://github.com/fesch/CanZE
   {sid: '1f8.40', name: 'Electric Engine RPM'},
   {sid: '42e.20', name: 'Engine Fan Speed'},
-  {sid: '42e.44', name: 'High Voltage Temperature'},
+  {sid: '42e.44', name: 'High Voltage Temperature', transform: transformTemperature, unit: '°C'},
   {sid: '42e.56', name: 'Charging Power'},
   {sid: '7bb.6161.120', name: 'SID_Total_kWh'},
 ];
