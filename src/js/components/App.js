@@ -92,6 +92,7 @@ export default {
       if (data.length) {
 
         const layout = {
+          uirevision: 'true', // Must be same value between redraws to preserve
           xaxis: {
             title: 'Time',
           },
