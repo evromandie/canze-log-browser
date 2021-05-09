@@ -14,7 +14,7 @@
     "cross-env": "^5.1",
     "jquery": "^3.2",
     "laravel-mix": "^4.0.7",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.21",
     "mithril": "^1.1.6",
     "plotly.js": "^1.48.3",
     "popper.js": "^1.12",
