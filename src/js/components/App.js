@@ -1,6 +1,6 @@
 import m from 'mithril';
 import sids from '../sids';
-import Plotly from 'plotly.js';
+import Plotly from 'plotly.js-dist';
 import LogFile from '../models/LogFile';
 import SID from '../models/SID';
 
@@ -253,7 +253,7 @@ export default {
                       console.log(text);
 
                       const file = new LogFile(fileName);
-                      file.read(text);
+                      file.read(text, sids);
 
                       vnode.state.files.push(file);
 
